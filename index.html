@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Maddah: The Legend Of The End</title>
+    <style>
+        body {
+            background: #1a1a1a;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container { text-align: center; }
+        .timer {
+            display: flex;
+            gap: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .segment { background: #333; padding: 15px; border-radius: 8px; min-width: 80px; }
+        .label { display: block; font-size: 0.8rem; text-transform: uppercase; color: #aaa; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>El Maddah: The Legend Of The End</h1>
+    <div class="timer" id="countdown">
+        <div class="segment"><span id="days">00</span><span class="label">Days</span></div>
+        <div class="segment"><span id="hours">00</span><span class="label">Hours</span></div>
+        <div class="segment"><span id="minutes">00</span><span class="label">Mins</span></div>
+        <div class="segment"><span id="seconds">00</span><span class="label">Secs</span></div>
+    </div>
+</div>
+
+<script>
+    // Set your target date here (Format: "Month Day, Year HH:MM:SS")
+    const targetDate = new Date("Feb 17, 2026 18:59:59").getTime();
+
+    const updateTimer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        // Time calculations
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result
+        document.getElementById("days").innerText = d;
+        document.getElementById("hours").innerText = h;
+        document.getElementById("minutes").innerText = m;
+        document.getElementById("seconds").innerText = s;
+
+        // If the count down is finished
+        if (distance < 0) {
+            clearInterval(updateTimer);
+            document.querySelector(".container").innerHTML = "<h1>The Event Has Started!</h1>";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
