@@ -5,24 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Maddah: The Legend Of The End</title>
     <style>
-        body {
-    /* Replace 'background.jpg' with your actual file name */
-    background-image: url('background.jpg'); 
-    
-    /* This makes sure the image covers the whole screen */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    body {
+        /* 1. This gray color shows if the image is missing */
+        background-color: #333; 
 
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+        /* 2. Make sure this name matches your uploaded file exactly! */
+        background-image: url('background.jpg'); 
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container { 
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent black box */
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .timer {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .segment {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        min-width: 70px;
+    }
+
+    .label {
+        display: block;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        margin-top: 5px;
+    }
+</style>
         .container { text-align: center; }
         .timer {
             display: flex;
@@ -77,5 +109,6 @@
 </body>
 
 </html>
+
 
 
