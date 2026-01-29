@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>El Maddah: The Legend Of The End</title>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     
     <style>
         body {
-            /* Using bg.jpg as you requested */
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('bg.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-color: #000;
-            color: #d4af37; /* Gold color */
+            color: #d4af37;
             font-family: 'Cinzel', serif;
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px; /* Reduced padding for mobile */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,62 +24,52 @@
         }
 
         .container {
-            max-width: 800px;
             width: 100%;
+            max-width: 600px; /* Better width for mobile */
         }
 
         .event-box {
             background: rgba(10, 10, 10, 0.9);
-            margin-bottom: 50px;
-            padding: 30px;
-            border: 2px solid #4a0000; /* Dark red border */
-            box-shadow: 0 0 25px rgba(139, 0, 0, 0.6);
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #4a0000;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
             border-radius: 10px;
             text-align: center;
-            backdrop-filter: blur(5px);
         }
 
         h1 {
             font-family: 'Creepster', cursive;
-            font-size: 3rem;
+            font-size: 2.2rem; /* Smaller font for mobile screens */
             color: #8b0000;
-            margin: 0;
-            text-shadow: 0 0 10px #ff0000;
-            letter-spacing: 3px;
-        }
-
-        .subtitle {
-            font-size: 1rem;
-            color: #777;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 10px;
         }
 
         .timer {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
+            /* FIX 2: This allows the boxes to drop to the next line if they don't fit */
+            flex-wrap: wrap; 
         }
 
         .segment {
             background: #111;
-            padding: 15px;
+            padding: 10px;
             border: 1px solid #333;
-            min-width: 85px;
+            /* FIX 3: Flex-basis makes the boxes grow or shrink to fit the row */
+            flex: 1 1 70px; 
+            min-width: 60px;
         }
 
         .segment span {
-            font-size: 2.5rem;
-            display: block;
+            font-size: 1.8rem; /* Smaller numbers so they don't overflow */
             color: #fff;
-            font-weight: bold;
         }
 
         .label {
-            font-size: 0.7rem;
-            color: #555;
-            text-transform: uppercase;
+            font-size: 0.6rem;
+            color: #666;
         }
     </style>
 </head>
@@ -89,7 +78,6 @@
 <div class="container">
     <div class="event-box">
         <h1>First Episode</h1>
-        <p class="subtitle">The Legend Begins In:</p>
         <div class="timer" id="timer-episode">
             <div class="segment"><span class="days">00</span><span class="label">Days</span></div>
             <div class="segment"><span class="hours">00</span><span class="label">Hours</span></div>
@@ -100,7 +88,6 @@
 
     <div class="event-box">
         <h1>New Song Release</h1>
-        <p class="subtitle">The Mystery Unfolds In:</p>
         <div class="timer" id="timer-song">
             <div class="segment"><span class="days">00</span><span class="label">Days</span></div>
             <div class="segment"><span class="hours">00</span><span class="label">Hours</span></div>
@@ -111,7 +98,6 @@
 </div>
 
 <script>
-    // These are your dates and the IDs we created above
     const events = [
         { id: "timer-episode", date: "Feb 17, 2026 18:59:59" },
         { id: "timer-song", date: "Jan 30, 2026 18:30:00" }
@@ -120,12 +106,11 @@
     async function updateTimers() {
         let now;
         try {
-            // This gets the REAL time from the internet
             const response = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC');
             const data = await response.json();
             now = new Date(data.datetime).getTime();
         } catch (e) {
-            now = new Date().getTime(); // Fallback to your computer time
+            now = new Date().getTime();
         }
 
         events.forEach(event => {
@@ -138,7 +123,6 @@
                 return;
             }
 
-            // Calculation for the numbers
             element.querySelector(".days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             element.querySelector(".hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             element.querySelector(".minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
@@ -146,7 +130,6 @@
         });
     }
 
-    // Refresh every second
     setInterval(updateTimers, 1000);
     updateTimers();
 </script>
